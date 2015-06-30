@@ -6,5 +6,5 @@ exports.answer = function(req,res) {
 	
 	if (req.query.respuesta === "Roma") { 
 			res.render('quizes/answer', { resultado : "correcto", enlace : '../', mensaje : "Volver a la pagina principal"});}
-	else {res.render('quizes/answer', { resultado : "incorrecto", enlace : '../quizes/question', mensaje : "Volver a intentarlo" });}
+	else {res.render('quizes/answer', { resultado : "incorrecto", enlace : '../quizes/question', mensaje : "Volver a intentarlo >>" });}
 };
