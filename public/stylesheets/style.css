@@ -69,6 +69,7 @@ footer {
 #preguntas {
   float: left;
   width: 40%;
+  margin-right: 30px;
 }
 
 #preguntas span {
@@ -91,4 +92,8 @@ footer {
 
 .derecha {
  padding: 10px;
+}
+
+.flotaderrecha {
+  float: right;
 }

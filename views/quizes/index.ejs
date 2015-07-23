@@ -1,9 +1,14 @@
 
 <div id="preguntas">
 	<h3>Elije una pregunta</h3>
+	<table>
 	<% var i; for (i=0 ; i< quizes.length ; i++) { %>
-  	 <span class="derecha"><%= quizes[i].pregunta %></span><a href="/quizes/<%= quizes[i].id %>">Ir ></a><br>
- 	<% } %> 
+  	 <tr>
+  	 <td><span class="derecha"><%= quizes[i].pregunta %></span></td><td><a href="/quizes/<%= quizes[i].id %>"><input type="button" value="Ir a la pregunta"/></a></td>
+  	 <td><a href="/quizes/<%= quizes[i].id %>/edit "><input type="button" value="Editar pregunta"/></a></td>
+  	 </tr>
+ 	<% } %>
+ 	</table> 
 </div>
 <div id="busquedas">
 	<h3>Escribe la busqueda que quieras hacer</h3>

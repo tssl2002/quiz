@@ -16,42 +16,67 @@ exports.index = function(req,res,next) {
 	if (req.query.search) {
 		search = '%'+req.query.search.replace(/ /g,'%')+'%';
 		models.Quiz.findAll({where: ["pregunta like ?", search],order:'pregunta'}).then( function(quizes){
-			res.render('quizes/index.ejs',{ quizes : quizes });
+			res.render('quizes/index.ejs',{ quizes : quizes , errors : []});
 	}).catch(function (error) { next(error);});
 	}
 
 	else {models.Quiz.findAll().then(function(quizes){
-			res.render('quizes/index.ejs',{ quizes : quizes });
+			res.render('quizes/index.ejs',{ quizes : quizes , errors : [] });
 	}).catch(function (error) { next(error);});
 }
 }
 
 exports.show = function(req,res) {
-			res.render('quizes/show',{ quiz : req.quiz });
+			res.render('quizes/show',{ quiz : req.quiz , errors : []});
 }
 
 exports.answer = function(req,res) {
 		var resp = cadena.textoPlano(req.query.respuesta);
 		var solucion = cadena.textoPlano(req.quiz.respuesta);
 		if ( resp === solucion ) {
-			res.render('quizes/answer',{ resultado : "correcto", enlace : '../', mensaje : "Volver a la pagina principal"});
-	} else {res.render('quizes/answer', { resultado : "incorrecto", enlace : '../'+quiz.id, mensaje : "Volver a intentarlo >>" });}
+			res.render('quizes/answer',{ resultado : "¡¡¡CORRECTO!!!", enlace : '../', mensaje : "Volver a la pagina principal" , errors : [] , imagen : "/images/acierto.png"});
+	} else {res.render('quizes/answer', { resultado : "¡¡¡FALLASTE!!!", enlace : '../'+ req.quiz.id, mensaje : "Vuelve a intentarlo >>" , errors : [] , imagen : "/images/error.png" });}
 	
 }
 
 exports.new = function (req,res) {
 	var quiz = models.Quiz.build({ pregunta:'Pregunta',respuesta:'Respuesta'});
-	res.render('quizes/new',{ quiz : quiz});
+	res.render('quizes/new',{ quiz : quiz , errors : [] , typeValue : "placeholder"});
 }
 
 exports.create = function(req,res) {
 	var quiz = models.Quiz.build(req.body.quiz);
 
-	quiz.save({fields: ["pregunta","respuesta"]}).then(function() {
-		res.redirect('/quizes');
-		
+	quiz.validate().then(function(err) {
+		if(err) {
+			res.render('quizes/new',{ quiz : quiz , errors : err.errors , typeValue :"value"});
+		} else {
+			quiz.save({fields: ["pregunta","respuesta"]}).then(function() {
+		res.redirect('/quizes');});
+		}
+	});
+
+	}
+
+exports.edit = function(req,res) {
+	var quiz = req.quiz;
+	res.render('quizes/edit', { quiz : quiz , errors : [] , typeValue : "placeholder" })
+}
+
+exports.update = function(req,res) {
+	req.quiz.pregunta = req.body.quiz.pregunta;
+	req.quiz.respuesta = req.body.quiz.respuesta;
+
+	req.quiz.validate().then(function(err) {
+		if(err) {
+			res.render('quizes/edit',{ quiz : req.quiz , errors : err.errors , typeValue : "value" })
+		} else {
+			req.quiz.save({fields : ["pregunta","respuesta"]}).then(function() { res.redirect('/quizes')}); 
+		}
 	});
 }
+		
+	
 
 
 

@@ -1,4 +1,9 @@
 <h3> Añadir pregunta </h3>
 <form method="post" action="/quizes/create">
-<% include form.ejs %>
+<p>Nueva pregunta</p>
+<input type="text" name="quiz[pregunta]" <%= typeValue %>="<%= quiz.pregunta %>"/>
+<p>Respuesta</p>
+<input type="text" name="quiz[respuesta]" <%= typeValue %>="<%= quiz.respuesta %>"/><br><br><br>
+<a href="/quizes"><button type="button">Cancelar</button></a>
+<input type="submit" value="Guardar">
 </form>
