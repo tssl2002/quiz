@@ -59,7 +59,7 @@ exports.create = function(req,res) {
 		if(err) {
 			res.render('quizes/new',{ quiz : quiz , errors : err.errors , typeValue :"value"});
 		} else {
-			quiz.save({fields: ["pregunta","respuesta"]}).then(function() {
+			quiz.save({fields: ["pregunta","respuesta","tema"]}).then(function() {
 		res.redirect('/quizes');});
 		}
 	});
@@ -79,7 +79,7 @@ exports.update = function(req,res) {
 		if(err) {
 			res.render('quizes/edit',{ quiz : req.quiz , errors : err.errors , typeValue : "value" })
 		} else {
-			req.quiz.save({fields : ["pregunta","respuesta"]}).then(function() { res.redirect('/quizes')}); 
+			req.quiz.save({fields : ["pregunta","respuesta","tema"]}).then(function() { res.redirect('/quizes')}); 
 		}
 	});
 }
