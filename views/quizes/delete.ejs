@@ -1,0 +1,6 @@
+<h3>Borrar pregunta</h3>
+<p><%= quiz.pregunta %></p>
+<form method="post" action="/quizes/<%= quiz.id %>?_method=delete">
+	<a href="/quizes"><button type="button">Cancelar</button></a>
+	<button type="submit">Borrar</button>
+</form>	

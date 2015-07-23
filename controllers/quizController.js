@@ -12,6 +12,12 @@ exports.load = function(req,res,next,quizId) {
 		}).catch(function (error) { next(error);});
 }
 
+
+exports.author = function(req,res) {
+	res.render('author', { errors : []})
+}
+
+
 exports.index = function(req,res,next) {
 	if (req.query.search) {
 		search = '%'+req.query.search.replace(/ /g,'%')+'%';
@@ -26,9 +32,11 @@ exports.index = function(req,res,next) {
 }
 }
 
+
 exports.show = function(req,res) {
 			res.render('quizes/show',{ quiz : req.quiz , errors : []});
 }
+
 
 exports.answer = function(req,res) {
 		var resp = cadena.textoPlano(req.query.respuesta);
@@ -74,6 +82,16 @@ exports.update = function(req,res) {
 			req.quiz.save({fields : ["pregunta","respuesta"]}).then(function() { res.redirect('/quizes')}); 
 		}
 	});
+}
+
+exports.delete = function(req,res) {
+	if(!req.query._method) {
+		res.render('quizes/delete' , { quiz : req.quiz , errors : []});
+	} else {
+		req.quiz.destroy().then(function() { res.redirect('/quizes')}).catch(function(error) {next(error)}); 
+	}
+
+
 }
 		
 	

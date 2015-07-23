@@ -15,9 +15,10 @@ router.get('/quizes/new',						quizController.new);
 router.get('/quizes/:quizId(\\d+)/edit',        quizController.edit);
 router.post('/quizes/create',					quizController.create);
 router.put('/quizes/:quizId(\\d+)',             quizController.update);
+router.get('/author',                           quizController.author);
+router.get('/quizes/:quizId(\\d+)/delete',      quizController.delete);
+router.delete('/quizes/:quizId(\\d+)',			quizController.delete);
 
-router.get('/author', function(req,res) {
-	res.render('author', { errors : []});
-});
+
 
 module.exports = router;
