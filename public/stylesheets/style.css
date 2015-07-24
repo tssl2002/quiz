@@ -73,12 +73,25 @@ footer {
 
 #preguntas span {
   margin: 10px;
+  width: 30%;
 }
 
 #busquedas {
   float: left;  
 }
 
+table{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+th {
+  background-color: #294A53;
+  color: white;
+}
+th,td {
+  padding: 6px;
+}
 
 #busquedas input{
   padding: 5px;
@@ -95,4 +108,8 @@ footer {
 
 .flotaderrecha {
   float: right;
+}
+
+.tabla {
+  border: 1px solid #9EA7BD;
 }

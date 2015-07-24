@@ -1,16 +1,16 @@
 <h3> Editar pregunta </h3>
 <form method="post" action="/quizes/<%= quiz.id %>?_method=put">
 <p>Nueva pregunta</p>
-<input type="text" name="quiz[pregunta]" placeholder="<%= quiz.pregunta %>"/>
+<input type="text" name="quiz[pregunta]" value="<%= quiz.pregunta %>"/>
 <p>Respuesta</p>
-<input type="text" name="quiz[respuesta]" placeholder="<%= quiz.respuesta %>"/>
+<input type="text" name="quiz[respuesta]" value="<%= quiz.respuesta %>"/>
 <p>Tema</p>
 <select name="quiz[tema]">
-  <option value="otro" selected>Otro</option>
-  <option value="humanidades">Humanidades</option>
-  <option value="ocio">Ocio</option>
-  <option value="ciencia">Ciencia</option>
-  <option value="tecnologia">Tecnología</option>
+  <option value="Otro">Otro</option>
+  <option value="Humanidades">Humanidades</option>
+  <option value="Ocio">Ocio</option>
+  <option value="Ciencia">Ciencia</option>
+  <option value="Tecnologia">Tecnología</option>
 </select><br><br><br>
 <a href="/quizes"><button type="button">Cancelar</button></a>
 <input type="submit" value="Guardar">
