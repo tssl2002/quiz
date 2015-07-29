@@ -106,10 +106,21 @@ th,td {
  padding: 10px;
 }
 
-.flotaderrecha {
+.flotaderecha {
   float: right;
 }
 
 .tabla {
-  border: 1px solid #9EA7BD;
+  border: 0.1em solid  #DDDDDD;
+}
+
+.flotaizquierda {
+  float: left;
+}
+
+.ancho50 {
+  width: 50%;
+}
+.ancho40 {
+  width: 40%;
 }

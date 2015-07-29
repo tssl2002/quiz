@@ -1,0 +1,6 @@
+<h1>Nuevo comentaro</h1>
+<p>Añade un comentario a la pregunta:  <%= quiz.pregunta %></p>
+<form method="post" action="/quizes/<%= quiz.id %>/comments">
+<textarea name="comment[texto]" placeholder="Escribe tu comentario aqui" rows="7" cols="50"></textarea><br><br>
+<button type="submit">Guardar</button>
+<a href="/quizes"><button type="button">Cancelar</button></a>

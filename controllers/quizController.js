@@ -3,7 +3,9 @@ var models = require('../models/models.js')
 var cadena = require('../functions/cadenas.js')
 
 exports.load = function(req,res,next,quizId) {
-	models.Quiz.findById(quizId).then(
+	models.Quiz.find({
+					where : { id : Number(quizId)},
+					include : [ { model : models.Comment }]}).then(
 		function (quiz) {
 			if (quiz) {
 				req.quiz = quiz;
@@ -34,7 +36,8 @@ exports.index = function(req,res,next) {
 
 
 exports.show = function(req,res) {
-			res.render('quizes/show',{ quiz : req.quiz , errors : []});
+			if(!req.quiz.Comments) { res.render('quizes/show',{ mensaje: 'No existen comentarios para esta pregunta' ,quiz : req.quiz , errors : []})}
+			else {res.render('quizes/show',{ quiz : req.quiz , errors : []});}
 }
 
 
@@ -89,11 +92,15 @@ exports.delete = function(req,res) {
 	if(!req.query._method) {
 		res.render('quizes/delete' , { quiz : req.quiz , errors : []});
 	} else {
+		models.Comment.destroy(
+			{where: { QuizId : req.quiz.id }}).then( function(){
 		req.quiz.destroy().then(function() { res.redirect('/quizes')}).catch(function(error) {next(error)}); 
-	}
-
-
+		
+	});
 }
+}
+
+
 		
 	
 

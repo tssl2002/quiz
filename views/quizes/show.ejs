@@ -1,8 +1,23 @@
+   <div class="flotaizquierda ancho50">
    <h1>Contesta a la siguiente pregunta</h1>
     <p><%= quiz.pregunta %></p>
     <form method="get" action="/quizes/<%= quiz.id %>/answer">
     	<input type"text" name="respuesta" placeholder="Responde aqui"/>
     	<input type="submit" value="Enviar"/>
 	</form>
+	</div>
+	<div class="flotaizquierda ancho50">
+	<h1>Comentarios</h1>
+	<% if(quiz.Comments.length === 0) { %>
+	<p>No existen comentarios a esta pregunta.</p>
+	<% } else { %>
+	<% for(i in quiz.Comments) { %>
+	<p><%= parseInt(i)+1 %>. <%= quiz.Comments[i].texto %></p>
+	<% } %>
+	<% } %>
+	<a href="/quizes/<%= quiz.id %>/comments/new"><button>Añadir comentario</button></a>
+	</div>
+
 	<br>
+	<div class="clear"></div>
 	<p><a href="../">Volver a la pagina principal  >></a></p>

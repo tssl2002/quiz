@@ -27,11 +27,20 @@ var sequelize = new Sequelize(DB_name, user, pwd,
 
 
 var Quiz = sequelize.import(path.join(__dirname,'quiz'));
+var Comment = sequelize.import(path.join(__dirname,'comment'));
 
+Comment.belongsTo(Quiz);
+Quiz.hasMany(Comment);
+
+
+exports.Comment = Comment;
 exports.Quiz = Quiz;
 
+
 sequelize.sync().then( function() {
+
 	Quiz.count().then( function(count){
+      console.log(count);
 		if(count === 0) {
       Quiz.create({ pregunta : '¿Capital de Italia?',
                     respuesta : 'Roma',
@@ -44,6 +53,8 @@ sequelize.sync().then( function() {
                     tema: 'Otro'}).then(function(){ console.log('Base de datos creada')});
 		}
     });
+  Comment.count().then(function(count) { console.log(count);});
 });
+ 
 
 
