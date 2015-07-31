@@ -17,12 +17,21 @@
         <a href="/quizes"><li>Preguntas</li></a>
          <a href="/author"><li>Autor</li></a>
       </ul>
+      <div id="login" class="flotaderecha">
+        <% if(session.user) { %>
+        <span id="usuario">Usuario : <%= session.user.username %></span>
+        <form method="post" action="/logout?_method=delete">
+        <input id="logout" type="submit" id="log" value="logout"/>
+        <form>
+        <% } else { %>
+        <a id="log" href="/login">Login</a>
+        <% } %>
+      </div>
       <div class="clear"></div>
       <section class="main" id="seccion">
         
         <% if (errors.length) { %>
-          <span id="ErrorMsgs">
-            Corregir errores: <br/>
+          <span id="ErrorMsgs"><br/>
             <% for (var i in errors) { %>
               <span><%= errors[i].message %></span></br>
             <% } %>
