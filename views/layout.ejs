@@ -21,8 +21,8 @@
         <% if(session.user) { %>
         <span id="usuario">Usuario : <%= session.user.username %></span>
         <form method="post" action="/logout?_method=delete">
-        <input id="logout" type="submit" id="log" value="logout"/>
-        <form>
+        <input id="logout" type="submit"  value="logout"/>
+        </form>
         <% } else { %>
         <a id="log" href="/login">Login</a>
         <% } %>

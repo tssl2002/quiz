@@ -10,9 +10,11 @@
   	 <td class="tabla"><%= quizes[i].tema %></td>
   	 <td class="tabla ancho40"><%= quizes[i].pregunta %></td>
   	 <td id="preguntar"><a href="/quizes/<%= quizes[i].id %>"><input type="button" value="Ir a la pregunta"/></a></td>
-  	 <td <a href="/quizes/<%= quizes[i].id %>/edit "><input type="button" value="Editar pregunta"/></a></td>
-  	 <td ><a href="/quizes/<%= quizes[i].id %>/delete "><input type="button" value="Borrar pregunta"/></a></td>
+  	 <% if( session.user ) { %>
+  	 <td> <a href="/quizes/<%= quizes[i].id %>/edit "><input type="button" value="Editar pregunta"/></a></td>
+  	 <td><a href="/quizes/<%= quizes[i].id %>/delete"><input type="button" value="Borrar pregunta"/></a></td>
   	 </tr>
+  	 <% } %>
  	<% } %>
  	</table> 
 </div>
@@ -28,4 +30,8 @@
  </div>
 <div class="clear"></div>
 <h3>Crear una nueva pregunta</h3>
+ <% if( session.user) { %>
 <a href="/quizes/new"><button type="button">Crear</button></a>
+<% } else { %>
+<p> Para crear, editar o borrar preguntas hay que estar logeado</p>
+<% } %>

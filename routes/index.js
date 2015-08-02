@@ -15,13 +15,13 @@ router.param('quizId', quizController.load);
 router.get('/quizes', 							quizController.index);
 router.get('/quizes/:quizId(\\d+)', 			quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer',		quizController.answer);
-router.get('/quizes/new',						quizController.new);
-router.get('/quizes/:quizId(\\d+)/edit',        quizController.edit);
-router.post('/quizes/create',					quizController.create);
-router.put('/quizes/:quizId(\\d+)',             quizController.update);
+router.get('/quizes/new',						sessionController.loggerReq, quizController.new);
+router.get('/quizes/:quizId(\\d+)/edit',        sessionController.loggerReq, quizController.edit);
+router.post('/quizes/create',					sessionController.loggerReq, quizController.create);
+router.put('/quizes/:quizId(\\d+)',             sessionController.loggerReq, quizController.update);
 router.get('/author',                           quizController.author);
-router.get('/quizes/:quizId(\\d+)/delete',      quizController.delete);
-router.delete('/quizes/:quizId(\\d+)',			quizController.delete);
+router.get('/quizes/:quizId(\\d+)/delete',      sessionController.loggerReq, quizController.delete);
+router.delete('/quizes/:quizId(\\d+)',			sessionController.loggerReq, quizController.delete);
 
 //Rutas de commentController
 

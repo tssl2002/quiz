@@ -24,14 +24,14 @@ exports.index = function(req,res,next) {
 	if (req.query.search) {
 		search = '%'+req.query.search.replace(/ /g,'%')+'%';
 		models.Quiz.findAll({where: ["pregunta like ?", search],order:'pregunta'}).then( function(quizes){
-			res.render('quizes/index.ejs',{ quizes : quizes , errors : []});
+			res.render('quizes/index.ejs',{ session : req.session, quizes : quizes , errors : []});
 	}).catch(function (error) { next(error);});
 	}
 
 	else {models.Quiz.findAll().then(function(quizes){
-			res.render('quizes/index.ejs',{ quizes : quizes , errors : [] });
+			res.render('quizes/index.ejs',{session : req.session,  quizes : quizes , errors : [] });
 	}).catch(function (error) { next(error);});
-}
+} 
 }
 
 
@@ -89,6 +89,7 @@ exports.update = function(req,res) {
 }
 
 exports.delete = function(req,res) {
+	console.log(req.session.user);
 	if(!req.query._method) {
 		res.render('quizes/delete' , { quiz : req.quiz , errors : []});
 	} else {
