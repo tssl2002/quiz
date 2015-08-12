@@ -32,8 +32,6 @@ app.use(function(req,res,next){
         req.session.redir = req.path;
     }
     res.locals.session = req.session;
-    console.log(req.session.user);
-    console.log(res.locals);
     next();
 })
 

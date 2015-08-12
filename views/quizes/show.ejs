@@ -12,7 +12,14 @@
 	<p>No existen comentarios a esta pregunta.</p>
 	<% } else { %>
 	<% for(i in quiz.Comments) { %>
-	<p><%= parseInt(i)+1 %>. <%= quiz.Comments[i].texto %></p>
+	   <% if(quiz.Comments[i].publicado || session.user) { %>
+	    <p><%= parseInt(i)+1 %>. <%= quiz.Comments[i].texto %>
+	        <% if(!quiz.Comments[i].publicado && session.user) { %>
+	        	<a href="/quizes/<%= quiz.id %>/comments/<%= quiz.Comments[i].id %>/publish"><button type="button">Publicar</button></a>
+	        	
+	        	<% } %>
+		</p>
+		<% } %>
 	<% } %>
 	<% } %>
 	<a href="/quizes/<%= quiz.id %>/comments/new"><button>Añadir comentario</button></a>
