@@ -101,6 +101,17 @@ exports.delete = function(req,res) {
 }
 }
 
+exports.statistic = function(req,res) {
+	models.Quiz.findAll().then(function(quizes) {
+	models.Comment.findAll().then(function(comments) {
+			res.render('quizes/statistics' , { quizes : quizes , 
+											   comments : comments , 
+											   session : req.session,  
+											   errors : []});
+		})
+	});
+}
+
 
 		
 	

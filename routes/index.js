@@ -37,6 +37,8 @@ router.post('/login',  sessionController.create);
 router.delete('/logout',  sessionController.destroy);
 
 
+router.get('/quizes/statistics', quizController.statistic);
+
 
 
 module.exports = router;

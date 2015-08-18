@@ -1,0 +1,17 @@
+<h1>Estadisticas de la base de datos de Quiz</h1>
+<p>Numero de preguntas totales: <%= quizes.length %></p>
+<p>Numero de comentarios totales: <%= comments.length %></p>
+<p>Numero medio de comentarios por preguntas: <%= comments.length/quizes.length %></p>
+<% var total = 0; %>
+<%for (i in quizes) { %>
+	<%for(j in comments) { %>
+		<% if( quizes[i].id === comments[j].QuizId ) { %> 
+			<% total = total+1; %>
+			<% break; %>
+			<% } %>
+			
+	<% } %>
+<% } %>
+<p>Numero de preguntas con comentario: <%= total %></p>
+<p>Numero de preguntas sin comentario: <%= quizes.length-total %></p><br><br>
+<a href="/">Volver a la pagina inicial >>></a>

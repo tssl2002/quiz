@@ -2,13 +2,14 @@ exports.new = function(req,res) {
 	var errors = req.session.errors || {}
 	req.session.errors = {};
 
-	res.render('sessions/new' , { errors : errors});
+	res.render('sessions/new' , { mensaje : '' , errors : errors});
 
 }
 
 exports.create = function(req,res) {
 	var login = req.body.login;
 	var password = req.body.pass;
+	var date = new Date();
 
 	var user_controller = require('./user_controller');
 	user_controller.autenticar(login,password,function(err,user) {
@@ -20,6 +21,7 @@ exports.create = function(req,res) {
 		}
 
 		req.session.user = { id : user.id , username : user.username};
+		req.session.date = date.getTime();
 		res.redirect(req.session.redir.toString());
 	})
 

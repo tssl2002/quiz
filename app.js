@@ -33,7 +33,25 @@ app.use(function(req,res,next){
     }
     res.locals.session = req.session;
     next();
-})
+});
+
+app.use(function(req,res,next) {
+    var ahora = new Date();
+    if(!req.session.date) {
+        next()
+    } else { 
+
+        if( ahora.getTime()-req.session.date < 120000 ) {
+            var date = new Date();
+            req.session.date = date.getTime();
+            next()
+        } else {
+            delete req.session.user;
+            delete req.session.date;
+            res.render('sessions/new' , { mensaje : ' ¡¡ Has superado el tiempo permitido de espera !! . Vuelve a introducir tu usuario y tu password ', errors : [] });
+        }
+    }
+});
 
 app.use('/', routes);
 
